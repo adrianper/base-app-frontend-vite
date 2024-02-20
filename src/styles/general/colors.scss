@@ -1,0 +1,62 @@
+@function hexToRgb($color) {
+    @return red($color),
+    green($color),
+    blue($color);
+}
+
+// ------Variables syntax -----
+// --property--color--variant
+// --property--color--variant--interaction
+// --property--status
+
+// ----------------------CUSTOM COLORS-------------------
+
+$black--1: hexToRgb(#000000);
+$black--2: hexToRgb(#162127);
+$white--1: hexToRgb(#FFFFFF);
+$white--2: hexToRgb(#f3f3f3);
+$red--1: hexToRgb(#F00);
+$red--2: hexToRgb(#ff9191);
+$gray--1: hexToRgb(#b8bdd4);
+$gray--2: hexToRgb(#a6b1e1);
+$gray--3: hexToRgb(#17192e);
+$purple--1: hexToRgb(#DCD6F7);
+$purple--2: hexToRgb(#bf85d6);
+$blue--1: hexToRgb(#0077B6);
+$blue--2: hexToRgb(#00B4D8);
+$blue--3: hexToRgb(#C9F0F7);
+$blue--4: hexToRgb(#90E0EF);
+
+
+@mixin colorVariants($colorVariant, $color) {
+    --text-color--#{$colorVariant}: RGB(#{$color});
+    --border-color--#{$colorVariant}: RGB(#{$color});
+    --bg-color--#{$colorVariant}: RGB(#{$color});
+}
+
+body {
+
+    @include colorVariants(first, $blue--1);
+    @include colorVariants(first-alter, $gray--2);
+    @include colorVariants(second, $blue--2);
+    @include colorVariants(second-alter, $gray--1);
+    @include colorVariants(third, $purple--2);
+    @include colorVariants(third-alter, $purple--1);
+    @include colorVariants(error, $red--1);
+    @include colorVariants(error-alter, $red--2);
+    @include colorVariants('white', $white--1);
+    @include colorVariants(white-alter, $white--2);
+    @include colorVariants('black', $black--1);
+    @include colorVariants(black-alter, $black--2);
+    @include colorVariants(blue-alter, $blue--3);
+    @include colorVariants(blue-alter-2, $blue--4);
+
+    &.theme--first {
+        background-color: RGB(#{$white--1});
+    }
+
+    &.theme--dark {
+        background-color: RGB(#{$black--1});
+        @include colorVariants(first, $gray--1);
+    }
+}

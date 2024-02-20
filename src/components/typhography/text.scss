@@ -1,0 +1,102 @@
+@import '@/styles/general/general_functions.scss';
+
+@mixin text_elipsis {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin text_props() {
+
+    //------------------------------SIZE--------------------------------------
+    @for $i from 1 through 11 {
+        &.text-size--#{$i} {
+            font-size: getTextSize($i);
+        }
+    }
+
+    //----------------------------ALIGN--------------------------------------
+    @each $align in left,
+    center,
+    right,
+    justify {
+        &.text-align--#{$align} {
+            text-align: $align;
+        }
+    }
+
+    //----------------------------WEIGHT--------------------------------------
+    &.text--regular {
+        font-weight: lighter;
+    }
+
+    &.text--medium {
+        font-weight: normal;
+    }
+
+    &.text--bold {
+        font-weight: bold;
+    }
+
+
+    //----------------------------DECORATION--------------------------------------
+    &.text--underline {
+        text-decoration: underline;
+    }
+
+    //----------------------------SELECTABLE--------------------------------------
+    &.text--unselectable {
+        user-select: none;
+    }
+
+    //------------------------------ELIPSIS---------------------------------------
+    &.text--elipsis {
+        @include text_elipsis;
+    }
+
+    //-----------------------------COLOR--------------------------------------
+    @each $color in error,
+    first,
+    second,
+    third,
+    fourth,
+    alter--first,
+    alter--second,
+    alter--third,
+    alter--fourth,
+    white {
+        &.text-color--#{"" + $color} {
+            color: var(--text-color--#{$color});
+        }
+    }
+}
+
+
+h1,
+h2,
+h3 {
+    &.text {
+        font-weight: bold;
+        color: RGB(var(--color--black--4));
+    }
+}
+
+.text {
+    color: var(--text-color--black-alter);
+    text-align: left;
+    font-size: getTextSize(3);
+    font-family: var(--font--family--main);
+}
+
+.text {
+    @include text_props();
+}
+
+.text {
+    .icon {
+        margin: 0.3em 0.5em -0.5em 0.5em;
+        width: 1.8em;
+        height: 1.8em;
+    }
+}
